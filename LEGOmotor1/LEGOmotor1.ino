@@ -5,7 +5,7 @@ const unsigned int ENablePin = 9;
 unsigned int motorSpeed = 0;
 unsigned int motorDirection = 1;
 
-// Github test .. ja ja ja
+// Github test .. nog eentje
 void setup() {
   // put your setup code here, to run once:
 
