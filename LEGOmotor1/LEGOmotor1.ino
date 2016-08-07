@@ -5,15 +5,16 @@ const unsigned int ENablePin = 9;
 unsigned int motorSpeed = 0;
 unsigned int motorDirection = 1;
 
-// Github test .. ja ja ja
+
 void setup() {
   // put your setup code here, to run once:
 
 pinMode(controlPin1A, OUTPUT);
 pinMode(controlPin2A, OUTPUT);
 pinMode(ENablePin, OUTPUT);
-digitalWrite(ENablePin, LOW);
-
+//digitalWrite(ENablePin, LOW);
+analogWrite(ENablePin, 0);
+motorSpeed = 100;
 }
 
 void loop() {
@@ -21,14 +22,15 @@ void loop() {
 
 
 
-
-analogWrite(ENablePin, 100);
+analogWrite(ENablePin, motorSpeed);
 
 digitalWrite(controlPin1A, HIGH);
 digitalWrite(controlPin2A, LOW);
 
 
 delay(5000);
+
+analogWrite(ENablePin, motorSpeed);
 
 digitalWrite(controlPin1A, LOW);
 digitalWrite(controlPin2A, HIGH);
