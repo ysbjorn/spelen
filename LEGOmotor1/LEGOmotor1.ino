@@ -4,7 +4,7 @@ const unsigned int controlPin2A = 5;
 const unsigned int ENablePin = 9;
 unsigned int motorSpeed = 0;
 unsigned int motorDirection = 1;
-// dan verander ik ook :)
+
 // Github test .. ja ja ja
 void setup() {
   // put your setup code here, to run once:
