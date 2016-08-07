@@ -18,24 +18,26 @@ analogWrite(ENablePin, 0);
 setMotorSpeed(0);
 }
 
-void setMotorSpeed(int iMotorSpeed) //
+void setMotorSpeed(int iMotorSpeed) 
 {
   if (iMotorSpeed > 255) iMotorSpeed = 255;
   if (iMotorSpeed < 0) iMotorSpeed = 0;
   analogWrite(ENablePin, iMotorSpeed);
 }
 
-void setMotorDirection(bool iMotorDirection){
-
-if (iMotorDirection == rechts) {
-  digitalWrite(controlPin1A, HIGH);
-  digitalWrite(controlPin2A, LOW);
-                }
-else            {
-  digitalWrite(controlPin1A, LOW);
-  digitalWrite(controlPin2A, HIGH);
-                }
+void setMotorDirection(bool iMotorDirection)
+{
+  if (iMotorDirection == rechts) 
+  {
+    digitalWrite(controlPin1A, HIGH);
+    digitalWrite(controlPin2A, LOW);
+  } else 
+  {
+    digitalWrite(controlPin1A, LOW);
+    digitalWrite(controlPin2A, HIGH);
+  }
 }
+
 void loop() {
   // put your main code here, to run repeatedly.
 setMotorSpeed(100);
