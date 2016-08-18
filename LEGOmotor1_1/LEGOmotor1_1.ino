@@ -1,6 +1,6 @@
 
-const unsigned int controlPin1A = 2;
-const unsigned int controlPin2A = 5;
+const unsigned int controlPin1A = 8;
+const unsigned int controlPin2A = 10;
 const unsigned int ENablePin = 9;
 
 
