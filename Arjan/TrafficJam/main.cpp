@@ -44,11 +44,15 @@ void verplaatsing(CAuto *iArray)
 }
 void nieuweSnelheid(CAuto *iArray)
 {
+    iArray[0].versnelling = -1;
+    iArray[0].snelheid = iArray[0].snelheid + deltaT*iArray[0].versnelling;
+    if (iArray[0].snelheid < 0) iArray[0].snelheid = 0;
     for (int i=1; i<aantalAutos; i++)
     {
-      if (iArray[i].plaats - iArray[i-1].plaats < 25)iArray[i].versnelling = -1;  
-      if (iArray[i].plaats - iArray[i-1].plaats > 25)iArray[i].versnelling =  0;
-      if (iArray[i].plaats - iArray[i-1].plaats > 35)iArray[i].versnelling =  1;
+      if (iArray[i-1].plaats - iArray[i].plaats < 25)iArray[i].versnelling = -1;
+      if (iArray[i-1].plaats - iArray[i].plaats < 20)iArray[i].versnelling = -2;
+      if (iArray[i-1].plaats - iArray[i].plaats > 30)iArray[i].versnelling =  0;
+      if (iArray[i-1].plaats - iArray[i].plaats > 35)iArray[i].versnelling =  1;
       
       
     iArray[i].snelheid = iArray[i].snelheid + deltaT*iArray[i].versnelling;
@@ -90,11 +94,18 @@ int main(int argc, char** argv)
         geenBotsing = botsingCheck(wagen);
         if (geenBotsing) nieuweSnelheid(wagen);
         t++;
+        //printf("V: %g \n",wagen[1].snelheid);
     }    
        
-    if(geenBotsing)printf("helaas geen BOEM");
-    else printf("BOEM: %g",t*deltaT);
-            
+    if(geenBotsing)printf("helaas geen BOEM \n");
+    else printf("BOEM: %g \n",t*deltaT);
+      printf("TIME: %g \n",t*deltaT);  
+      
+      for (int i=1; i<aantalAutos+1; i++){
+      printf("Snelheid: %g \n",wagen[i-1].snelheid);
+      printf("Versnelling: %g \n\n",wagen[i-1].versnelling);
+      printf("Afstand: %g \n",wagen[i-1].plaats - wagen[i].plaats);
+      }
     return 0;
 }
 
