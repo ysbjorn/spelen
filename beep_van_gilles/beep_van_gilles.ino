@@ -19,7 +19,7 @@ void beep(unsigned int delayms, unsigned int delayafterms) {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for (int i=0; i<3;i++) {
+  /* for (int i=0; i<3;i++) {
     beep(100+i*200,200-i*50);
    // beep(50);
    // beep(50);
@@ -31,5 +31,5 @@ void loop() {
    // beep(50);
     delay(300);
   }
-  delay(500);
+  delay(500);*/
 }
