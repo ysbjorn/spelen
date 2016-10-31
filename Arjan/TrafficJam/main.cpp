@@ -44,9 +44,15 @@ void verplaatsing(CAuto *iArray)
 }
 void nieuweSnelheid(CAuto *iArray)
 {
-    for (int i=0; i<aantalAutos; i++)
+    for (int i=1; i<aantalAutos; i++)
     {
+      if (iArray[i].plaats - iArray[i-1].plaats < 25)iArray[i].versnelling = -1;  
+      if (iArray[i].plaats - iArray[i-1].plaats > 25)iArray[i].versnelling =  0;
+      if (iArray[i].plaats - iArray[i-1].plaats > 35)iArray[i].versnelling =  1;
+      
+      
     iArray[i].snelheid = iArray[i].snelheid + deltaT*iArray[i].versnelling;
+    
     if (iArray[i].snelheid < 0) iArray[i].snelheid = 0;
     }
 }
@@ -78,7 +84,7 @@ int main(int argc, char** argv)
   
    
     int t=0;
-    while (geenBotsing && t<aantalIteraties)
+    while (geenBotsing && t < aantalIteraties)
     {
         verplaatsing(wagen);
         geenBotsing = botsingCheck(wagen);
