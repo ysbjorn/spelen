@@ -24,15 +24,12 @@ const double afstandTotVolgende = 30.0; // meter
 
 void wagenInit (CAuto *iArray)
 {
-    //CAuto twagen[aantalAutos]=iArray[aantalAutos];
-    
     for (int i=0; i<aantalAutos; i++)               // beginpositie en snelheid
         {
         iArray[i].plaats = -1*i*afstandTotVolgende;  // -1 zodat wagen[0] voorop rijdt
         iArray[i].snelheid = 50;   
         iArray[i].versnelling = 0;
         }
-    //iArray[0].versnelling = -2;
 }
 
 void verplaatsing(CAuto *iArray)
