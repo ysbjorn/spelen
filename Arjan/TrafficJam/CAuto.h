@@ -24,6 +24,7 @@ public:
     double snelheid;
     double versnelling;
     void rijden();
+    void testrit(double ideltaT);
 private:
 
 };

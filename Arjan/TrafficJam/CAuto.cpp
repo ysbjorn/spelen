@@ -25,6 +25,11 @@ void CAuto::rijden(){
     printf("yippie \n");
  
 }
+
+void CAuto::testrit(double ideltaT)
+{ snelheid = 16+snelheid + ideltaT*versnelling;
+}
+
 CAuto::CAuto(const CAuto& orig) {
     printf("Warning... copy constructor not implemented!! zegt Krista");
 }

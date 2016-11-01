@@ -81,11 +81,12 @@ bool botsingCheck (CAuto *iArray)
 
 int main(int argc, char** argv) 
 {
-    bool geenBotsing = false;
+    bool geenBotsing = false; // hoofd loop uitschakelen.
     CAuto wagen[aantalAutos];
    
     wagenInit(wagen);
     wagen[0].rijden();
+    wagen[0].testrit(deltaT);
    
     int t=0;
     while (geenBotsing && t < aantalIteraties)
