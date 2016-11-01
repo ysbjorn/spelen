@@ -44,14 +44,15 @@ void verplaatsing(CAuto *iArray)
 }
 void nieuweSnelheid(CAuto *iArray)
 {
-    iArray[0].versnelling = -1;
-    iArray[0].snelheid = iArray[0].snelheid + deltaT*iArray[0].versnelling;
-    if (iArray[0].snelheid < 0) iArray[0].snelheid = 0;
+    //iArray[0].versnelling = -1;
+    //iArray[0].snelheid = iArray[0].snelheid + deltaT*iArray[0].versnelling;
+    //if (iArray[0].snelheid < 0) iArray[0].snelheid = 0;
     for (int i=1; i<aantalAutos; i++)
     {
-      if (iArray[i-1].plaats - iArray[i].plaats < 25)iArray[i].versnelling = -1;
-      if (iArray[i-1].plaats - iArray[i].plaats < 20)iArray[i].versnelling = -2;
-      if (iArray[i-1].plaats - iArray[i].plaats > 30)iArray[i].versnelling =  0;
+      if (iArray[i-1].plaats - iArray[i].plaats < 29)iArray[i].versnelling = -1;
+      //if (iArray[i-1].plaats - iArray[i].plaats < 28)iArray[i].versnelling = -2;
+      //if (iArray[i-1].plaats - iArray[i].plaats < 27)iArray[i].versnelling = -3;
+      if (iArray[i-1].plaats - iArray[i].plaats > 29)iArray[i].versnelling =  0;
       if (iArray[i-1].plaats - iArray[i].plaats > 35)iArray[i].versnelling =  1;
       
       
@@ -71,8 +72,7 @@ bool botsingCheck (CAuto *iArray)
                 if (iArray[i].plaats > iArray[i-1].plaats) 
                 {
                     tgeenBotsing = false;
-                   // printf("%d \n" , t);
-                    //printf("%f  " , t*deltaT);      // is dit goed? 
+                   
                 }
             }    
     return(tgeenBotsing);
@@ -81,18 +81,27 @@ bool botsingCheck (CAuto *iArray)
 
 int main(int argc, char** argv) 
 {
-    bool geenBotsing = true;
+    bool geenBotsing = false;
     CAuto wagen[aantalAutos];
    
     wagenInit(wagen);
-  
+    wagen[0].rijden();
    
     int t=0;
     while (geenBotsing && t < aantalIteraties)
     {
         verplaatsing(wagen);
         geenBotsing = botsingCheck(wagen);
-        if (geenBotsing) nieuweSnelheid(wagen);
+        if (geenBotsing) {
+            //if (t*deltaT > 10)wagen[0].versnelling = 0;  
+           // if (t*deltaT < 10)wagen[0].versnelling = +1;
+           // if (t*deltaT < 5)wagen[0].versnelling = -1;
+          if (t*deltaT < 5)wagen[0].versnelling = -1;
+            else { if (wagen[0].snelheid < 50)wagen[0].versnelling = 1;
+                    else wagen[0].versnelling = 0;}  
+            wagen[0].snelheid = wagen[0].snelheid + deltaT*wagen[0].versnelling;
+            if (wagen[0].snelheid < 0) wagen[0].snelheid = 0;
+            nieuweSnelheid(wagen);}
         t++;
         //printf("V: %g \n",wagen[1].snelheid);
     }    

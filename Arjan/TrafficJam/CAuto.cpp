@@ -21,7 +21,10 @@ CAuto::CAuto(double iplaats, double isnelheid, double iversnelling){
     snelheid=isnelheid;
     versnelling=iversnelling;
 }
-
+void CAuto::rijden(){
+    printf("yippie \n");
+ 
+}
 CAuto::CAuto(const CAuto& orig) {
     printf("Warning... copy constructor not implemented!! zegt Krista");
 }

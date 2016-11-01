@@ -23,6 +23,7 @@ public:
     double plaats;
     double snelheid;
     double versnelling;
+    void rijden();
 private:
 
 };
