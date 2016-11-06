@@ -14,26 +14,64 @@
 #include "CAuto.h"
 
 CAuto::CAuto() {
-}
-
-CAuto::CAuto(double iplaats, double isnelheid, double iversnelling){
-    plaats=iplaats;
-    snelheid=isnelheid;
-    versnelling=iversnelling;
-}
-void CAuto::rijden(){
-    printf("yippie \n");
- 
-}
-
-void CAuto::testrit(double ideltaT)
-{ snelheid = 16+snelheid + ideltaT*versnelling;
-}
+    printf("Calling default constructor... zegt Krista \n");
+   }
 
 CAuto::CAuto(const CAuto& orig) {
-    printf("Warning... copy constructor not implemented!! zegt Krista");
+    printf("Warning... copy constructor not implemented!! zegt Krista \n");
 }
 
 CAuto::~CAuto() {
+    printf("Warning... virtual constructor not implemented!! zegt Krista \n");
 }
+
+
+const double beginSnelheid = 50.0;      // meter per seconde
+const double afstandTotVolgende = 30.0; // meter
+const double autolengte = 3.0;          // meter
+
+
+
+CAuto::CAuto(double iplaats, double isnelheid, double iversnelling, double ilengte)
+{
+    plaats=iplaats;
+    snelheid=isnelheid;
+    versnelling=iversnelling;
+    lengte=ilengte;
+}
+void CAuto::beginpositie(int iautonummer)
+{
+    plaats = -1*iautonummer*afstandTotVolgende;
+    snelheid = beginSnelheid;
+    lengte = autolengte;
+    versnelling = 0;
+    printf(" %d \n",iautonummer);
+}
+
+void CAuto::snelheidVeranderen(double ideltaT)
+{
+    snelheid = snelheid + ideltaT*versnelling;    
+}
+
+void CAuto::verplaatsing(double ideltaT)
+{ 
+    plaats = plaats + snelheid*ideltaT;
+}
+
+bool CAuto::botsing(CAuto& iother)
+{
+  bool tBotsing = false;
+
+    if (iother.plaats > plaats) 
+                {
+                    tBotsing = true;
+                }
+    return tBotsing;
+}
+
+//double CAuto/::afstand(CAuto& iOther) {
+  //  return iOther.plaats-plaats;
+//}
+
+
 

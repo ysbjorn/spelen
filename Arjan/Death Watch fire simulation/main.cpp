@@ -20,6 +20,8 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    switch();
+    // ? operator
     return 0;
 }
 

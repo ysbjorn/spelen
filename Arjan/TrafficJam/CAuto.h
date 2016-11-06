@@ -17,14 +17,19 @@
 class CAuto {
 public:
     CAuto();
-    CAuto(double iplaats, double isnelheid, double iversnelling);
+    CAuto(double iplaats, double isnelheid, double iversnelling, double ilengte);
     CAuto(const CAuto& orig);
     virtual ~CAuto();
     double plaats;
     double snelheid;
     double versnelling;
-    void rijden();
-    void testrit(double ideltaT);
+    double lengte;
+    
+    void beginpositie(int iautonummer);
+    void snelheidVeranderen(double ideltaT);
+    void verplaatsing(double ideltaT);
+    //double afstand(CAuto& iOther);
+    bool botsing(CAuto& iother);
 private:
 
 };

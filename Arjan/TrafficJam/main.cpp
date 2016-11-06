@@ -11,18 +11,69 @@
 using namespace std;
 
 const long int aantalIteraties = 10000000; 
-const int aantalAutos = 10;
+
 const double deltaT = 0.00001;     // seconde
 const double beginSnelheid = 50.0;      // meter per seconde
-
+const int aantalAutos = 10;
 const double reactietijd = 0.1;         // seconde
 const double afstandTotVolgende = 30.0; // meter
                
 
 
 
+}  
 
-void wagenInit (CAuto *iArray)
+
+int main(int argc, char** argv) 
+{
+    bool geenBotsing = false; // hoofd loop uitschakelen.
+    
+    CAuto wagen[aantalAutos];
+    
+    for (int i=0; i<aantalAutos; i++)
+    {
+        wagen[i].beginpositie(i);
+    }
+   
+    
+    
+    
+    int t=0;
+    while (geenBotsing && t < aantalIteraties)
+    {
+        for (int i=0; i<aantalAutos; i++) wagen[i].verplaatsing(deltaT);
+        
+        for (int i=0; i<aantalAutos; i++)
+        {
+            if (wagen[i].botsing(wagen[i-1])) geenBotsing = false;
+        }
+        
+        if (geenBotsing) 
+        {
+        for (int i=0; i<aantalAutos; i++) wagen[i].snelheidVeranderen(deltaT);
+        }   
+          
+        t++;
+    }    
+       
+    if(geenBotsing)printf("helaas geen BOEM \n");
+    else printf("BOEM: %g \n",t*deltaT);
+      printf("TIME: %g \n",t*deltaT);  
+      
+      for (int i=1; i<aantalAutos+1; i++){
+          printf("nr: %d \n",i-1);
+      printf("Snelheid: %g \n",wagen[i-1].snelheid);
+      printf("Versnelling: %g \n",wagen[i-1].versnelling);
+      printf("plaats: %g \n",wagen[i-1].plaats );
+      printf("Afstand: %g \n",wagen[i-1].plaats - wagen[i].plaats);
+      printf("Lengte: %g \n\n",wagen[i-1].lengte);
+      
+      }
+    return 0;
+}
+
+/*
+ void wagenInit (CAuto *iArray)
 {
     for (int i=0; i<aantalAutos; i++)               // beginpositie en snelheid
         {
@@ -31,18 +82,17 @@ void wagenInit (CAuto *iArray)
         iArray[i].versnelling = 0;
         }
 }
-
-void verplaatsing(CAuto *iArray)
-{
-   
-   
-   for (int i=0; i<aantalAutos; i++)       // nieuwe plaats
-            {
-                iArray[i].plaats= iArray[i].plaats + deltaT*iArray[i].snelheid;
-            } 
-
-}
-void nieuweSnelheid(CAuto *iArray)
+ 
+ if (t*deltaT < 5)wagen[0].versnelling = -1;
+            else { if (wagen[0].snelheid < 50)wagen[0].versnelling = 1;
+                    else wagen[0].versnelling = 0;
+                 } 
+          
+            wagen[0].snelheid = wagen[0].snelheid + deltaT*wagen[0].versnelling;
+            if (wagen[0].snelheid < 0) wagen[0].snelheid = 0;
+            nieuweSnelheid(wagen);
+ 
+ void nieuweSnelheid(CAuto *iArray)
 {
     //iArray[0].versnelling = -1;
     //iArray[0].snelheid = iArray[0].snelheid + deltaT*iArray[0].versnelling;
@@ -50,7 +100,7 @@ void nieuweSnelheid(CAuto *iArray)
     for (int i=1; i<aantalAutos; i++)
     {
       if (iArray[i-1].plaats - iArray[i].plaats < 29)iArray[i].versnelling = -1;
-      //if (iArray[i-1].plaats - iArray[i].plaats < 28)iArray[i].versnelling = -2;
+      if (iArray[i-1].plaats - iArray[i].plaats < 28)iArray[i].versnelling = -2;
       //if (iArray[i-1].plaats - iArray[i].plaats < 27)iArray[i].versnelling = -3;
       if (iArray[i-1].plaats - iArray[i].plaats > 29)iArray[i].versnelling =  0;
       if (iArray[i-1].plaats - iArray[i].plaats > 35)iArray[i].versnelling =  1;
@@ -60,9 +110,18 @@ void nieuweSnelheid(CAuto *iArray)
     
     if (iArray[i].snelheid < 0) iArray[i].snelheid = 0;
     }
-}
-
-bool botsingCheck (CAuto *iArray)
+ 
+ 
+ void verplaatsing(CAuto *iArray)
+{
+   
+   
+   for (int i=0; i<aantalAutos; i++)       // nieuwe plaats
+            {
+                iArray[i].plaats= iArray[i].plaats + deltaT*iArray[i].snelheid;
+            } 
+ 
+ bool botsingCheck (CAuto *iArray)
 {
     bool tgeenBotsing = true;
   
@@ -72,54 +131,10 @@ bool botsingCheck (CAuto *iArray)
                 if (iArray[i].plaats > iArray[i-1].plaats) 
                 {
                     tgeenBotsing = false;
-                   
                 }
             }    
     return(tgeenBotsing);
-}  
-
-
-int main(int argc, char** argv) 
-{
-    bool geenBotsing = false; // hoofd loop uitschakelen.
-    CAuto wagen[aantalAutos];
-   
-    wagenInit(wagen);
-    wagen[0].rijden();
-    wagen[0].testrit(deltaT);
-   
-    int t=0;
-    while (geenBotsing && t < aantalIteraties)
-    {
-        verplaatsing(wagen);
-        geenBotsing = botsingCheck(wagen);
-        if (geenBotsing) {
-            //if (t*deltaT > 10)wagen[0].versnelling = 0;  
-           // if (t*deltaT < 10)wagen[0].versnelling = +1;
-           // if (t*deltaT < 5)wagen[0].versnelling = -1;
-          if (t*deltaT < 5)wagen[0].versnelling = -1;
-            else { if (wagen[0].snelheid < 50)wagen[0].versnelling = 1;
-                    else wagen[0].versnelling = 0;}  
-            wagen[0].snelheid = wagen[0].snelheid + deltaT*wagen[0].versnelling;
-            if (wagen[0].snelheid < 0) wagen[0].snelheid = 0;
-            nieuweSnelheid(wagen);}
-        t++;
-        //printf("V: %g \n",wagen[1].snelheid);
-    }    
-       
-    if(geenBotsing)printf("helaas geen BOEM \n");
-    else printf("BOEM: %g \n",t*deltaT);
-      printf("TIME: %g \n",t*deltaT);  
-      
-      for (int i=1; i<aantalAutos+1; i++){
-      printf("Snelheid: %g \n",wagen[i-1].snelheid);
-      printf("Versnelling: %g \n\n",wagen[i-1].versnelling);
-      printf("Afstand: %g \n",wagen[i-1].plaats - wagen[i].plaats);
-      }
-    return 0;
-}
-
-
+ */
 
 
 
