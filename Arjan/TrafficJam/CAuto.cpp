@@ -13,8 +13,16 @@
 #include <stdio.h>
 #include "CAuto.h"
 
+const double beginSnelheid = 50.0;      // meter per seconde
+const double afstandTotVolgende = 30.0; // meter
+const double autolengte = 3.0;          // meter
+
 CAuto::CAuto() {
-    printf("Calling default constructor... zegt Krista \n");
+    plaats = 0;
+    snelheid = beginSnelheid;
+    lengte = autolengte;
+    versnelling = 0;
+    //printf("Calling default constructor... zegt Krista \n");
    }
 
 CAuto::CAuto(const CAuto& orig) {
@@ -22,13 +30,11 @@ CAuto::CAuto(const CAuto& orig) {
 }
 
 CAuto::~CAuto() {
-    printf("Warning... virtual constructor not implemented!! zegt Krista \n");
+    printf("Warning... virtual destructor not implemented!! zegt Krista \n");
 }
 
 
-const double beginSnelheid = 50.0;      // meter per seconde
-const double afstandTotVolgende = 30.0; // meter
-const double autolengte = 3.0;          // meter
+
 
 
 
@@ -42,10 +48,8 @@ CAuto::CAuto(double iplaats, double isnelheid, double iversnelling, double ileng
 void CAuto::beginpositie(int iautonummer)
 {
     plaats = -1*iautonummer*afstandTotVolgende;
-    snelheid = beginSnelheid;
-    lengte = autolengte;
-    versnelling = 0;
-    printf(" %d \n",iautonummer);
+    
+    //printf(" %d \n",iautonummer);
 }
 
 void CAuto::snelheidVeranderen(double ideltaT)
@@ -62,7 +66,7 @@ bool CAuto::botsing(CAuto& iother)
 {
   bool tBotsing = false;
 
-    if (iother.plaats > plaats) 
+    if (iother.plaats < plaats) 
                 {
                     tBotsing = true;
                 }

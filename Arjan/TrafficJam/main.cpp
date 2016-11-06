@@ -13,37 +13,32 @@ using namespace std;
 const long int aantalIteraties = 10000000; 
 
 const double deltaT = 0.00001;     // seconde
-const double beginSnelheid = 50.0;      // meter per seconde
+//const double beginSnelheid = 50.0;      // meter per seconde
 const int aantalAutos = 10;
 const double reactietijd = 0.1;         // seconde
-const double afstandTotVolgende = 30.0; // meter
+//const double afstandTotVolgende = 30.0; // meter
                
 
 
 
-}  
+  
 
 
 int main(int argc, char** argv) 
 {
-    bool geenBotsing = false; // hoofd loop uitschakelen.
+    bool geenBotsing = true; // hoofd loop uitschakelen.
     
     CAuto wagen[aantalAutos];
     
-    for (int i=0; i<aantalAutos; i++)
-    {
-        wagen[i].beginpositie(i);
-    }
-   
-    
-    
+    for (int i=0; i<aantalAutos; i++)wagen[i].beginpositie(i);
+  
     
     int t=0;
     while (geenBotsing && t < aantalIteraties)
     {
         for (int i=0; i<aantalAutos; i++) wagen[i].verplaatsing(deltaT);
         
-        for (int i=0; i<aantalAutos; i++)
+        for (int i=1; i<aantalAutos; i++)
         {
             if (wagen[i].botsing(wagen[i-1])) geenBotsing = false;
         }

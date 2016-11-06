@@ -28,7 +28,6 @@ public:
     void beginpositie(int iautonummer);
     void snelheidVeranderen(double ideltaT);
     void verplaatsing(double ideltaT);
-    //double afstand(CAuto& iOther);
     bool botsing(CAuto& iother);
 private:
 
